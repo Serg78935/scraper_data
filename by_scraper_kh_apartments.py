@@ -101,7 +101,7 @@ try:
         # Scrape pages
         all_apartments = []
         base_url = "https://dom.ria.com/uk/prodazha-kvartir/kharkov/?page={}"  
-        for page in range(1, 51):  # Pages 1 to n
+        for page in range(1, 5):  # Pages 1 to n
             url = base_url.format(page)
             print(f"Scraping {url}...")
             apartments = scrape_page(url, driver)
