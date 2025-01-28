@@ -12,33 +12,30 @@
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout репозиторію (гілка main)
+      - name: Checkout repository (main branch)
         uses: actions/checkout@v4
 
-      - name: Checkout коду з master
+      - name: Checkout code from master
         run: |
           git fetch origin master
           git checkout master
 
-      - name: Встановити Python
+      - name: Install Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      #- name: Перевірити SSL
-      #  run: python -c "import ssl; print(ssl.OPENSSL_VERSION)"
 
-      - name: Встановити всі необхідні бібліотеки
+      - name: Install all necessary libraries
         run: |
           pip install requests beautifulsoup4 selenium datetime chromedriver  
-          pip install pandas #By webdriver timedelta date
-      - name: Перевірити, чи є файл
+          pip install pandas 
+      - name: Check if the file exists
         run: ls -la
       
-      - name: Встановити залежності
+      - name: Install dependencies
         run: |
           #pip install --upgrade pip
-          #pip install -r requirements.txt  # Якщо є файл із залежностями
+          #pip install -r requirements.txt  # If there is a dependency file
 
-
-      - name: Запустити Python-скрипт
+      - name: Run Python script
         run: python by_scraper_kh_apartments.py
