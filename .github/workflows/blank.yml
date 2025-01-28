@@ -28,7 +28,7 @@
       - name: Встановити всі необхідні бібліотеки
         run: |
           pip install requests beautifulsoup4 selenium datetime chromedriver ssl 
-          pip install closing By webdriver timedelta date
+          # pip install closing By webdriver timedelta date
       - name: Перевірити, чи є файл
         run: ls -la
       
