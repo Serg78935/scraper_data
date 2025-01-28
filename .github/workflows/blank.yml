@@ -21,5 +21,6 @@ jobs:
       - uses: actions/checkout@v4
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
-      - run: npm install -g by_scraper_kh_apartments.py
-      - run: by_scraper_kh_apartments.py -v
+        run: | 
+          npm install by_scraper_kh_apartments.py
+          npm run by_scraper_kh_apartments.py 
