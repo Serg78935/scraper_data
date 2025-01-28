@@ -1,28 +1,37 @@
-name: CI
 
-on:
+ name: CI
+
+ on:
   push:
     branches: [ "main", "master" ]
   pull_request:
     branches: [ "main", "master" ]
 
-jobs:
+ jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout репозиторію
+      - name: Checkout репозиторію (гілка main)
         uses: actions/checkout@v4
+
+      - name: Checkout коду з master
+        run: |
+          git fetch origin master
+          git checkout master
 
       - name: Встановити Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'  # Можна змінити на іншу версію
+          python-version: '3.10'
 
       - name: Встановити залежності
         run: |
-          pip install --upgrade pip #-r requirements.txt # Якщо є файл із залежностями
+          pip install --upgrade pip
+          # pip install -r requirements.txt  # Якщо є файл із залежностями
+
+      - name: Перевірити, чи є файл
+        run: ls -la
 
       - name: Запустити Python-скрипт
-        run: python ./by_scraper_kh_apartments.py
- 
+        run: python by_scraper_kh_apartments.py
