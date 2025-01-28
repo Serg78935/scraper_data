@@ -26,7 +26,7 @@
           python-version: '3.10'
 
       - name: Встановити всі необхідні бібліотеки
-        run: pip install requests beautifulsoup4 selenium datetime time chromedriver
+        run: pip install requests beautifulsoup4 selenium datetime chromedriver ssl
 
       - name: Перевірити, чи є файл
         run: ls -la
