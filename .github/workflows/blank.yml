@@ -1,26 +1,28 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main", "master" ]
   pull_request:
     branches: [ "main", "master" ]
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    # Steps represent a sequence of tasks that will be executed as part of the job
+
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: | 
-          npm install by_scraper_kh_apartments.py
-          npm run by_scraper_kh_apartments.py 
+      - name: Checkout репозиторію
+        uses: actions/checkout@v4
+
+      - name: Встановити Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'  # Можна змінити на іншу версію
+
+      - name: Встановити залежності
+        run: |
+          pip install -r requirements.txt  # Якщо є файл із залежностями
+
+      - name: Запустити Python-скрипт
+        run: python3 by_scraper_kh_apartments.py
+ 
