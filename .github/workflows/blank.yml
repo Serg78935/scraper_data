@@ -25,10 +25,14 @@
         with:
           python-version: '3.10'
 
+      - name: Встановити бібліотеку requests
+        run: pip install requests
+
+      
       - name: Встановити залежності
         run: |
           pip install --upgrade pip
-          # pip install -r requirements.txt  # Якщо є файл із залежностями
+          pip install -r requirements.txt  # Якщо є файл із залежностями
 
       - name: Перевірити, чи є файл
         run: ls -la
