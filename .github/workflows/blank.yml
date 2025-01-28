@@ -1,4 +1,5 @@
 
+
  name: CI
 
  on:
@@ -27,15 +28,14 @@
 
       - name: Встановити бібліотеку requests
         run: pip install requests
-
+      - name: Перевірити, чи є файл
+        run: ls -la
       
       - name: Встановити залежності
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt  # Якщо є файл із залежностями
 
-      - name: Перевірити, чи є файл
-        run: ls -la
 
       - name: Запустити Python-скрипт
         run: python by_scraper_kh_apartments.py
