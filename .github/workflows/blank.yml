@@ -21,7 +21,7 @@ jobs:
 
       - name: Встановити залежності
         run: |
-          pip install -r requirements.txt  # Якщо є файл із залежностями
+          pip install --upgrade pip #-r requirements.txt # Якщо є файл із залежностями
 
       - name: Запустити Python-скрипт
         run: python3 by_scraper_kh_apartments.py
