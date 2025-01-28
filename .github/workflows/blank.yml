@@ -1,5 +1,4 @@
 
-
  name: CI
 
  on:
@@ -26,8 +25,9 @@
         with:
           python-version: '3.10'
 
-      - name: Встановити бібліотеку requests
-        run: pip install requests
+      - name: Встановити всі необхідні бібліотеки
+        run: pip install requests beautifulsoup4 selenium datetime time chromedriver
+
       - name: Перевірити, чи є файл
         run: ls -la
       
