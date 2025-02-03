@@ -2,7 +2,6 @@
 #import os
 #os.system(" pip install selenium")
 
-
 import requests
 from bs4 import BeautifulSoup
 import sqlite3
@@ -297,8 +296,8 @@ output_table = "apartments3"
 dataframe = display_table(database_path, table_name1, table_name2, output_table)
 """
 
-#  Adds new columns with calculates:
 
+# Interest in real estate is displayed in a pivot table (several calculated columns has been added) 
 """
 import pandas as pd
 import numpy as np
@@ -312,87 +311,67 @@ def display_table(db_path, table_name, output_table):
         conn.close()
         return
 
-    # Date conversion
-    df["post_date"] = pd.to_datetime(df["post_date"], errors="coerce")
-    df["scrape_date1"] = pd.to_datetime(df["scrape_date1"], errors="coerce")
-    df["scrape_date2"] = pd.to_datetime(df["scrape_date2"], errors="coerce")
+    # Function to calculate d_cal (date difference in days)                                                                     
 
-    # Calculation scrape_date_cal and scrape_date_cal1
-    df["scrape_date_cal1"] = (df["scrape_date1"] - df["post_date"]).dt.days.fillna(0)   # if you need to 'int':   .astype(int)
-    df["scrape_date_cal2"] = (df["scrape_date2"] - df["post_date"]).dt.days.fillna(0)
-    df["post_date"] = date(df["post_date"])        #.date()
-    df["scrape_date1"] = date(df["scrape_date1"])  #.date()
-    df["scrape_date2"] = date(df["scrape_date2"])  #.date()
+    def calculate_d(d0,d):
+        d0 = pd.to_datetime(d0, errors='coerce') # Convert dates to datetime format                                                               
+        d = pd.to_datetime(d, errors='coerce')
+        if pd.isna(d):
+            return np.nan                                                        
+        d_cal = (d - d0).days
+        return d_cal 
+    df["scrape_date_cal1"] = df.apply(lambda row: calculate_d(row["post_date"], row["scrape_date1"]), axis=1)  
+    df["scrape_date_cal2"] = df.apply(lambda row: calculate_d(row["post_date"], row["scrape_date2"]), axis=1)
+
+    # Constant k
+    k = 0.15  # from 0.05  to  0.18
     
-    
-    k = 0.18  # from 0.05  to  0.18
+    # Function to calculate views_0 (views for the first day)
+    def calculate_c(a, d, k):
+        if pd.isna(a) or pd.isna(d) or d == 0:
+            return np.nan
+        return a * k / (1 - np.exp(-k * d))
 
-    # Iterative function
-    def calculate_views0(row, views_av, k):
-        scrape_date_cal1 = row["scrape_date_cal1"]
-        if scrape_date_cal1 == 0:
-            return 0, scrape_date_cal1
-        views_0 = row["views1"] * k / (1 - np.exp(-k * scrape_date_cal1))
-        if np.isnan(views_av):
-            return views_0, scrape_date_cal1
-        """ """
-        while not (views_av * 0.5 < views_0 < 2.0 * views_av):
-            scrape_date_cal1 += 30.417  # it's 365 / 12
-            views_0 = row["views1"] * k / (1 - np.exp(-k * scrape_date_cal1))
-            if scrape_date_cal1 > 365 :
-                break
-        """ """
-        return views_0, scrape_date_cal1
+    df["views_0"] = round(df.apply(lambda row: calculate_c(row["views1"], row["scrape_date_cal1"], k), axis=1), 2)
 
-    # Calculating the average value views_av    
-    df["views_0"] = round(df.apply(                                                         
-        lambda row: row["views1"] * k / (1 - np.exp(-k * row["scrape_date_cal1"]))
-        if row["scrape_date_cal1"] > 0 else 0,
-        axis=1), 2)
-        
-    views_av = round(df.loc[(df["views_0"] > 0) & (df["views_0"] < 700), "views_0"].mean(), 2)   
-    print(repr(views_av))
+    # Calculating the average value views_av  
+      
+    views_av = round(df.loc[(df["views_0"] > 0 ) & (df["views_0"] < 300), "views_0"].mean(), 2)   
+    print(f"views_0_average = {views_av}")
     if np.isnan(views_av):
-        views_av = 150
+        views_av = 125
 
-    # Calculation views_0
-    """ """
-    df[["views_0", "scrape_date_cor"]] = round(df.apply(
-        lambda row: pd.Series(calculate_views0(row, views_av, k)), axis=1), 2)
-    """ """
-    # Calculation views_decision_%
-    df["views_decision_%"] = round(((df["views_0"] - views_av) / views_av) * 100 , 2)
-    df.loc[(df["views_0"] == 0), "views_decision_%" ] = 0
-    # Calculation views_dec1
-    df["views_dec1"] = round((
-        (
-            df["views2"] - df["views1"]
-            * (1 - np.exp(-k * df["scrape_date_cal2"]))
-            / (1 - np.exp(-k * df["scrape_date_cal1"]))
-        )
-        / (
-            df["views1"]
-            * (1 - np.exp(-k * df["scrape_date_cal2"]))
-            / (1 - np.exp(-k * df["scrape_date_cal1"]))
-        )
-    ) * 100 , 2)
-    df.loc[np.isnan(df["views_dec1"]), "views_dec1" ] = 0
-    df = df.sort_values(by=['views_decision_%', 'views_dec1'], ascending=[False, False])
-    df.loc[(df["views_decision_%"] > 200.00), "views_decision_%" ] = 'Unreal'
-    df.loc[(df["views_decision_%"] == 0), "views_decision_%" ] = 'NaN'
-    df.loc[(df["views_dec1"] == 0), "views_dec1" ] = 'NaN' 
+    # Calculation views_decision_% : Initial relative interest in real estate
 
-    # Ensure the output table exists
+    df["views_decision_%"] = df["views_0"].apply(lambda c: round(((c - views_av) / views_av) * 100, 2) if pd.notna(c) and views_av != 0 else np.nan)
+    
+    # Function to calculate views_decision1_% : Relative interest in real estate in a few days
+    def calculate_e(a1, a2, c1, c2, k):
+        if pd.isna(a1) or pd.isna(a2) or pd.isna(c1) or pd.isna(c2) or c1 == 0:
+            return np.nan
+        views_dec1 = round((
+        (a2 - a1 * (1 - np.exp(-k * c2)) / (1 - np.exp(-k * c1)))
+        /
+        (a1 * (1 - np.exp(-k * c2)) / (1 - np.exp(-k * c1)))
+        ) * 100 , 2)
+        return views_dec1
+
+    df["views_decision1_%"] = df.apply(lambda row: calculate_e(row["views1"], row["views2"], row["scrape_date_cal1"], row["scrape_date_cal2"], k), axis=1)
+    
+    df = df.sort_values(by=['views_decision_%', 'views_decision1_%'], ascending=[False, False])
+    df.loc[(df["views_decision_%"] > 300.00), "views_decision_%" ] = 'Unreal'
+
+    # Ensure the output table exists  # link_dom_ria_com TEXT,
     cursor = conn.cursor()
     cursor.execute(f'''
         CREATE TABLE IF NOT EXISTS {output_table} (
             id INTEGER,
             link_dom_ria_com TEXT,
+            location TEXT,
             area_general_living_kitch TEXT,
             rooms INTEGER,
             floor TEXT,
             price_usd REAL,
-            location TEXT,
             post_date TEXT
         )
     ''')
@@ -414,7 +393,6 @@ table_name = "apartments3"
 output_table = "apartments_decision"
 dataframe = display_table(database_path, table_name, output_table)
 """
-
 # Calculate k :
 """
 import pandas as pd
