@@ -1,4 +1,4 @@
-
+# Data scraping
 #import os
 #os.system(" pip install selenium")
 
@@ -134,7 +134,7 @@ def display_table(db_path, table_name):     # Displays the content of a SQLite t
     # Read the table into a DataFrame
     query = f"SELECT * FROM {table_name}"
     df = pd.read_sql_query(query, conn) 
-    # df.to_csv("apartments.csv", index=False)  # Send database in format: .csv  # Obviously: df.to_csv("C:/Users/phili/Python/apartments.csv", index=False)     
+    # df.to_csv("apartments.csv", index=False)  # Send database in format: .csv  # Obviously: df.to_csv("C:/Users/.../apartments.csv", index=False)     
     # df.to_csv(r'D:\apartments.csv', index=False)
 
     # Close the connection
