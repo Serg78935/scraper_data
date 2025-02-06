@@ -15,6 +15,7 @@ The goal of the work is to find the most attractive (valuable) options
 when investing in real estate. The project is complete. But it can be improved,
 for example, by entering data about the location of the object and 
 conducting an analysis against the area assessment index.
+As an example, the final result is given in "apartments_decision.csv".
 
 ## 🚀 Functionality
 
