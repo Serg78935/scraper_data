@@ -30,13 +30,13 @@ As an example, the final result is given in "apartments_decision.csv".
 - Python 3.8+
 
 ## Instruction
-bash
-# Cloning a repository
-git clone https://github.com/Serg78935/scraper_data.git
-cd yourrepo
 
-## Install dependencies:
-pip install -r requirements.txt
+   # Cloning a repository
+     git clone https://github.com/Serg78935/scraper_data.git
+     cd yourrepo
+
+   # Install dependencies:
+     pip install -r requirements.txt
 
 ## 💡 Using
 
