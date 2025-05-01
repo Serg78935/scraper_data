@@ -1,6 +1,5 @@
 # 📌 "Monitoring the real estate market in a specific location."
 
-"""
 Build status :
 
  https://img.shields.io/github/actions/workflow/status/Serg78935/scraper_data/blank.yml?branch=main        
@@ -27,22 +26,17 @@ As an example, the final result is given in "apartments_decision.csv".
 - 🔹 Defining the function and calculating the coefficient of interest decay
 
 
-### Requirements
+## Requirements
 - Python 3.8+
 
-### Instruction
-```bash
+## Instruction
+bash
 # Cloning a repository
 git clone https://github.com/Serg78935/scraper_data.git
 cd yourrepo
 
-# Installing dependencies
-pip install requests
-pip install selenium
-pip install beautifulsoup4
-pip install chromedriver
-pip install datetime
-pip install pandas
+## Install dependencies:
+pip install -r requirements.txt
 
 ## 💡 Using
 
@@ -75,4 +69,4 @@ This project is licensed under the [MIT](LICENSE) license.
 ## 🤝 Contacts
 
 If you have any questions, please contact me at [serg.20.10.1963@gmail.com] or create an Issue in the repository.
-"""
+
