@@ -35,7 +35,7 @@
       - name: Install dependencies
         run: |
           #pip install --upgrade pip
-          #pip install -r requirements.txt  # If there is a dependency file
+          pip install -r requirements.txt  
 
       - name: Run Python script
         run: python by_scraper_kh_apartments.py
