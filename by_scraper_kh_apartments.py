@@ -1,6 +1,4 @@
 # Data scraping
-#import os
-#os.system(" pip install selenium")
 
 import requests
 from bs4 import BeautifulSoup
@@ -133,8 +131,7 @@ def display_table(db_path, table_name):     # Displays the content of a SQLite t
     
     # Read the table into a DataFrame
     query = f"SELECT * FROM {table_name}"
-    df = pd.read_sql_query(query, conn) 
-    # df.to_csv("apartments.csv", index=False)  # Send database in format: .csv  # Obviously: df.to_csv("C:/Users/.../apartments.csv", index=False)     
+    df = pd.read_sql_query(query, conn)      
     # df.to_csv(r'D:\apartments.csv', index=False)
 
     # Close the connection
@@ -295,7 +292,6 @@ output_table = "apartments3"
 # Display the merged table
 dataframe = display_table(database_path, table_name1, table_name2, output_table)
 """
-
 
 # Interest in real estate is displayed in a pivot table (several calculated columns has been added) 
 """
