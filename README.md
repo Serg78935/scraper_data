@@ -1,6 +1,6 @@
-# # 📌 "Monitoring the real estate market in a specific location."
+ # 📌 "Monitoring the real estate market in a specific location."
 
-  📌 Build status:
+      Build status:
       https://img.shields.io/github/actions/workflow/status/Serg78935/
               scraper_data/blank.yml?branch=master
 
@@ -14,11 +14,11 @@ location of the object and conducting an analysis against the area assessment in
 As an example, the final result is given in "apartments_decision.csv".
 
 🚀 Functionality:
-    - 🔹 Data scraping;
-    - 🔹 Joining two or more tables;
-    - 🔹 Creating a result table by adding calculated columns;
+    - 🔹 Data scraping
+    - 🔹 Joining two or more tables
+    - 🔹 Creating a result table by adding calculated columns
     - 🔹 Definition of a first-order function describing 
-         a potential buyer's interest in an object over time;
+         a potential buyer's interest in an object over time
     - 🔹 Defining the function and calculating the coefficient of interest decay.
 
 📌 Requirements:
@@ -50,7 +50,7 @@ you need to store result in .csv format please launch miniscript
 📌 Development plan
   - 🔹 Defining district assessment criteria
   - 🔹 Defining a function to describe the district rating
-  - 🔹  Documentation improvements
+  - 🔹  Documentation improvements.
 📝 License
     This project is licensed under the MIT license.
 
