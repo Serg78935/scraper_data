@@ -24,12 +24,13 @@ As an example, the final result is given in "apartments_decision.csv".
 📌 Requirements:
      Python 3.8+
    
-📌  Instruction
+📌  Instruction:
      - 🔹 Cloning a repository:
            git clone https://github.com/Serg78935/scraper_data.git
            cd yourrepo
      - 🔹 Install dependencies:
-           pip install -r requirements.txt
+           pip install -r requirements.txt .
+           
 💡 Using:
    The first (basic) script for collecting data from the "dom ria" site. 
 The result is a table of 8 indicators that characterize the real estate 
@@ -51,6 +52,7 @@ you need to store result in .csv format please launch miniscript
   - 🔹 Defining district assessment criteria
   - 🔹 Defining a function to describe the district rating
   - 🔹  Documentation improvements.
+  - 
 📝 License
     This project is licensed under the MIT license.
 
