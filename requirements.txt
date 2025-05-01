@@ -1,6 +1,0 @@
-requests
-selenium
-beautifulsoup4
-chromedriver
-datetime
-pandas
