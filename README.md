@@ -1,10 +1,10 @@
- # # 📌 "Monitoring the real estate market in a specific location."
+  # 📌 "Monitoring the real estate market in a specific location."
 
       Build status:
       https://img.shields.io/github/actions/workflow/status/Serg78935/
               scraper_data/blank.yml?branch=master
 
-#📖 Description:
+📖 Description:
   This project has developed some tools for monitoring the real estate market.
 A data table has been built for a certain period of time, which makes it possible 
 to analyze real estate objects put up for sale. The goal of the work is to find 
@@ -13,24 +13,25 @@ is complete. But it can be improved, for example, by entering data about the
 location of the object and conducting an analysis against the area assessment index. 
 As an example, the final result is given in "apartments_decision.csv".
 
-#🚀 Functionality:
-    - 🔹 Data scraping
-    - 🔹 Joining two or more tables
-    - 🔹 Creating a result table by adding calculated columns
-    - 🔹 Definition of a first-order function describing 
+🚀 Functionality:
+   - 🔹 Data scraping
+   - 🔹 Joining two or more tables
+   - 🔹 Creating a result table by adding calculated columns
+   - 🔹 Definition of a first-order function describing 
          a potential buyer's interest in an object over time
-    - 🔹 Defining the function and calculating the coefficient of interest decay.
+   - 🔹 Defining the function and calculating the coefficient of interest decay.
 
-#📌 Requirements:
+📌 Requirements:
      Python 3.8+
    
-#📌  Cloning a repository:
-           git clone https://github.com/Serg78935/scraper_data.git
-                             cd yourrepo
-#📌  Install dependencies:
-           pip install -r requirements.txt 
+📌  Cloning a repository:
+     git clone https://github.com/Serg78935/scraper_data.git
+     cd yourrepo
+     
+📌  Install dependencies:
+     pip install -r requirements.txt 
            
-#💡 Using:
+💡 Using:
    The first (basic) script for collecting data from the "dom ria" site. 
 The result is a table of 8 indicators that characterize the real estate 
 object, 2 of which will change over time: views, scraper_date. You can 
@@ -47,14 +48,14 @@ investment by "Interest in real estate is displayed in a pivot table". If
 you need to store result in .csv format please launch miniscript 
 (string from 124 to 154).
 
-#📌 Development plan
+📌 Development plan
   - 🔹 Defining district assessment criteria
   - 🔹 Defining a function to describe the district rating
   - 🔹  Documentation improvements.
   
-#📝 License
+📝 License
     This project is licensed under the MIT license.
 
-#🤝 Contacts
+🤝 Contacts
       If you have any questions, please contact me at [serg.20.10.1963@gmail.com] 
      or create an Issue in the repository.
