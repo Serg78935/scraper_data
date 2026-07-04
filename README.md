@@ -69,3 +69,5 @@ This project is licensed under the [MIT](LICENSE) license.
 ## 🤝 Contacts
 
 If you have any questions, please contact me at [serg.20.10.1963@gmail.com] or create an Issue in the repository.
+
+For more information about the analytics tool, read the [scraper_data analytics guide](./ANALYTICS_GUIDE.md)
